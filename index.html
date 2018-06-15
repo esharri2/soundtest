@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!--Text to speech-->
+    <script src="https://code.responsivevoice.org/responsivevoice.js" async defer></script>
+
+    <title>sound test</title>
+</head>
+
+<body>
+    <button id="playvoice">Play voice</button>
+    <button id="playbeep">Play beep</button>
+</body>
+
+<script>
+    document.getElementById("playvoice").addEventListener("click", () => {
+        responsiveVoice.speak("you clicked a button");
+    })
+
+    document.getElementById("playbeep").addEventListener("click", () => {
+
+        playSound(0, 1000)
+    })
+
+    window.setTimeout(() => {
+        responsiveVoice.speak("i waited...");
+    }, 7000)
+
+    const playSound = (a, b) => {
+        window.setTimeout(() => {
+            oscillator.start()
+        }, a)
+
+        window.setTimeout(() => {
+            oscillator.stop()
+        }, b)
+
+    }
+
+
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var oscillator = audioCtx.createOscillator();
+    var gainNode = audioCtx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    playSound(10000,12000);
+
+
+
+
+</script>
+
+</html>
